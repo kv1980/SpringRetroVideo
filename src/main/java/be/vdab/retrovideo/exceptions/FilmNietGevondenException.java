@@ -1,5 +1,5 @@
 package be.vdab.retrovideo.exceptions;
 
-public class GenreNietGevondenException extends RuntimeException {
+public class FilmNietGevondenException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 }

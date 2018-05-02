@@ -11,7 +11,7 @@ import be.vdab.retrovideo.entities.Genre;
 @Repository
 class JDBCGenreRepository implements GenreRepository {
 	private final NamedParameterJdbcTemplate template;
-	private static final String SELECTEER_ALLES = "select id, naam from genres order by naam";
+	private static final String SELECT_ALL = "select id, naam from genres order by naam";
 	private final RowMapper<Genre> genreRowMapper = 
 			(resultSet,rowNum) -> new Genre(resultSet.getLong("id"),resultSet.getString("naam"));
 
@@ -20,7 +20,7 @@ class JDBCGenreRepository implements GenreRepository {
 	}
 
 	@Override
-	public List<Genre> vindAlleGenres() {
-		return template.query(SELECTEER_ALLES,genreRowMapper);
+	public List<Genre> findAll() {
+		return template.query(SELECT_ALL,genreRowMapper);
 	}
 }

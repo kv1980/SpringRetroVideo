@@ -12,21 +12,20 @@ public class FilmTest {
 	
 	@Before
 	public void before() {
-		film = new Film(1L,1L,"Titel testfilm",10,BigDecimal.TEN);
-		film.setGereserveerd(1);
+		film = new Film(1L,"Titel testfilm",10,1,BigDecimal.TEN);
+		film.verhoogAantalGereserveerdMetEen();
 	}
 	
 	@Test
 	public void geefCorrecteAantallenNaReservatie() {
 		assertEquals(10,film.getVoorraad());
-		assertEquals(1,film.getGereserveerd());
-		assertEquals(9,film.toonBeschikbareExemplaren());
+		assertEquals(2,film.getGereserveerd());
+		assertEquals(8,film.toonBeschikbareExemplaren());
 	}
 	
 	@Test
 	public void geefCorrecteGegevens() {
 		assertEquals(1L,film.getId());
-		assertEquals(1L,film.getGenreId());
 		assertEquals("Titel testfilm",film.getTitel());
 		assertEquals(BigDecimal.TEN,film.getPrijs());
 	}

@@ -30,7 +30,7 @@ public class JDBCGenreRepositoryTest extends AbstractTransactionalJUnit4SpringCo
 	
 	@Test 
 	public void vindAlleGenresGesorteerdOpNaam() {
-		List<Genre> genres = repository.vindAlleGenres();
+		List<Genre> genres = repository.findAll();
 		assertEquals(super.countRowsInTable(GENRES),genres.size());
 		int indexA = 0;
 		int indexB = 0;
