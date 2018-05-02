@@ -9,13 +9,13 @@ import org.springframework.stereotype.Repository;
 import be.vdab.retrovideo.entities.Genre;
 
 @Repository
-class JDBCGenreRepository implements GenreRepository {
+class JdbcGenreRepository implements GenreRepository {
 	private final NamedParameterJdbcTemplate template;
 	private static final String SELECT_ALL = "select id, naam from genres order by naam";
 	private final RowMapper<Genre> genreRowMapper = 
 			(resultSet,rowNum) -> new Genre(resultSet.getLong("id"),resultSet.getString("naam"));
 
-	public JDBCGenreRepository(NamedParameterJdbcTemplate template) {
+	public JdbcGenreRepository(NamedParameterJdbcTemplate template) {
 		this.template = template;
 	}
 

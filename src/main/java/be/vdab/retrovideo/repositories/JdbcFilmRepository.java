@@ -10,21 +10,19 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import be.vdab.retrovideo.entities.Film;
-import be.vdab.retrovideo.exceptions.FilmNietGevondenException;
+import be.vdab.retrovideo.exceptions.FilmNotFoundException;
 
 @Repository
-class JDBCFilmRepository implements FilmRepository {
+class JdbcFilmRepository implements FilmRepository {
 	private final NamedParameterJdbcTemplate template;
 	private static final String UPDATE_FILM = "update films set gereserveerd=:gereserveerd where id=:id";
-	private static final String SELECT_ID_BY_GENREID = "select id from films where genreId=:genreId order by titel";
+	private static final String SELECT_FILMS_BY_GENREID = "select id, titel, voorraad, gereserveerd, prijs from films where genreId=:genreId order by titel";
 	private static final String SELECT_FILM_BY_ID = "select id, titel, voorraad, gereserveerd, prijs from films where id=:id";
-	private final RowMapper<Long> idRowMapper =
-			(resultSet,rowNum) -> resultSet.getLong("id");
 	private final RowMapper<Film> filmRowMapper =
 			(resultSet,rowNum) -> new Film(resultSet.getLong("id"),resultSet.getString("titel"),resultSet.getInt("voorraad"),
 										   resultSet.getInt("gereserveerd"),resultSet.getBigDecimal("prijs"));		
 			
-	public JDBCFilmRepository(NamedParameterJdbcTemplate template) {
+	public JdbcFilmRepository(NamedParameterJdbcTemplate template) {
 		this.template = template;
 	}
 	
@@ -34,17 +32,17 @@ class JDBCFilmRepository implements FilmRepository {
 		parameters.put("id", film.getId());
 		parameters.put("gereserveerd", film.getGereserveerd());
 		if (template.update(UPDATE_FILM, parameters) == 0) {
-			throw new FilmNietGevondenException();
+			throw new FilmNotFoundException();
 		}
 	}
-				
+	
 	@Override
-	public List<Long> findFilmIdsByGenreId(Long genreId) {
-		return template.query(SELECT_ID_BY_GENREID,idRowMapper);
+	public List<Film> findFilmsByGenreId(long genreId) {
+		return template.query(SELECT_FILMS_BY_GENREID,Collections.singletonMap("genreId",genreId),filmRowMapper);
 	}
 		
 	@Override
-	public Film findFilmById(Long filmId) {
+	public Film findFilmById(long filmId) {
 		return template.queryForObject(SELECT_FILM_BY_ID,Collections.singletonMap("id",filmId),filmRowMapper);
 	}
 }
