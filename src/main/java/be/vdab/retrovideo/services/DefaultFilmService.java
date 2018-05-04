@@ -18,12 +18,6 @@ class DefaultFilmService implements FilmService {
 		this.repository = repository;
 	}
 
-	@Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED) 
-	@Override
-	public void update(Film film) {
-		repository.update(film);
-	}
-	
 	@Override
 	public List<Film> findFilmsByGenreId(long genreId) {
 		return repository.findFilmsByGenreId(genreId);

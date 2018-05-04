@@ -4,6 +4,4 @@ import be.vdab.retrovideo.valueobjects.Reservatie;
 
 public interface ReservatieService {
 	void create(Reservatie reservatie);
-	
-	
 }
