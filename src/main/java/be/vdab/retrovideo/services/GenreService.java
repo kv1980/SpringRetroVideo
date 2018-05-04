@@ -5,5 +5,5 @@ import java.util.List;
 import be.vdab.retrovideo.entities.Genre;
 
 public interface GenreService {
-	List<Genre> vindAlleGenres();
+	List<Genre> findAll();
 }

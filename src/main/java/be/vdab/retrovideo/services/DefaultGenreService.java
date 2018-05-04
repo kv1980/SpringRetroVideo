@@ -19,7 +19,7 @@ class DefaultGenreService implements GenreService {
 	}
 
 	@Override
-	public List<Genre> vindAlleGenres() {
+	public List<Genre> findAll() {
 		return repository.findAll();
 	}
 }

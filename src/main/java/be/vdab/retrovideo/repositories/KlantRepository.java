@@ -6,5 +6,5 @@ import be.vdab.retrovideo.entities.Klant;
 
 public interface KlantRepository {
 	List<Klant>findKlantenByLetters(String letters);
-	Klant findKlantById(long id);
+	Klant findKlantById(long klantId);
 }

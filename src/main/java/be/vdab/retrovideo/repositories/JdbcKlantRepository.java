@@ -28,7 +28,7 @@ class JdbcKlantRepository implements KlantRepository{
 	}
 
 	@Override
-	public Klant findKlantById(long id) {
-		return template.queryForObject(SELECT_KLANT_BY_ID,Collections.singletonMap("id",id),klantRowMapper);
+	public Klant findKlantById(long klantId) {
+		return template.queryForObject(SELECT_KLANT_BY_ID,Collections.singletonMap("id",klantId),klantRowMapper);
 	}
 }
