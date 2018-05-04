@@ -1,5 +1,6 @@
 package be.vdab.retrovideo.repositories;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,7 +25,7 @@ class JdbcReservatieRepository implements ReservatieRepository {
 		Map<String,Object> kolomWaarden = new HashMap<>();
 		kolomWaarden.put("klantid",reservatie.getKlantId());
 		kolomWaarden.put("filmid",reservatie.getFilmId());
-		kolomWaarden.put("reservatieDatum",reservatie.getReservatieDatum());
+		kolomWaarden.put("reservatieDatum",LocalDateTime.now());
 		insert.execute(kolomWaarden);
 	}
 }
