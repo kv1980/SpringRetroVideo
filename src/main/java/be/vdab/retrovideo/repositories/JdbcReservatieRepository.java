@@ -26,7 +26,5 @@ class JdbcReservatieRepository implements ReservatieRepository {
 		kolomWaarden.put("filmid",reservatie.getFilmId());
 		kolomWaarden.put("reservatieDatum",reservatie.getReservatieDatum());
 		insert.execute(kolomWaarden);
-
 	}
-
 }
