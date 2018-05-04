@@ -17,11 +17,11 @@ public class Reservatie {
 		return klantId;
 	}
 
-	public long getFilmId() {
-		return filmId;
-	}
-
 	public LocalDate getReservatieDatum() {
 		return reservatieDatum;
+	}
+
+	public long getFilmId() {
+		return filmId;
 	}
 }

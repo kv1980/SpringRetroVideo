@@ -16,7 +16,7 @@ public class Klant {
 		this.postnummer = postnummer;
 		this.gemeente = gemeente;
 	}
-
+	
 	public long getId() {
 		return id;
 	}

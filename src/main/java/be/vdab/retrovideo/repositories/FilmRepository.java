@@ -5,7 +5,7 @@ import java.util.List;
 import be.vdab.retrovideo.entities.Film;
 
 public interface FilmRepository {
-	void update(Film film);
+	void updateGereserveerd(Film film);
 	List<Film> findFilmsByGenreId(long genreId);
 	Film findFilmById(long filmId);
 }

@@ -13,11 +13,11 @@ public class FilmTest {
 	@Before
 	public void before() {
 		film = new Film(1L,"Titel testfilm",10,1,BigDecimal.TEN);
-		film.verhoogAantalGereserveerdMetEen();
 	}
 	
 	@Test
 	public void geefCorrecteAantallenNaReservatie() {
+		film.verhoogAantalGereserveerdMetEen();
 		assertEquals(10,film.getVoorraad());
 		assertEquals(2,film.getGereserveerd());
 		assertEquals(8,film.toonBeschikbareExemplaren());

@@ -15,7 +15,7 @@ import be.vdab.retrovideo.exceptions.FilmNotFoundException;
 @Repository
 class JdbcFilmRepository implements FilmRepository {
 	private final NamedParameterJdbcTemplate template;
-	private static final String UPDATE_FILM = "update films set gereserveerd=:gereserveerd where id=:id";
+	private static final String UPDATE_GERESERVEERD = "update films set gereserveerd=:gereserveerd where id=:id";
 	private static final String SELECT_FILMS_BY_GENREID = "select id, titel, voorraad, gereserveerd, prijs from films where genreId=:genreId order by titel";
 	private static final String SELECT_FILM_BY_ID = "select id, titel, voorraad, gereserveerd, prijs from films where id=:id";
 	private final RowMapper<Film> filmRowMapper =
@@ -27,11 +27,11 @@ class JdbcFilmRepository implements FilmRepository {
 	}
 	
 	@Override
-	public void update(Film film) {
+	public void updateGereserveerd(Film film) {
 		Map<String,Object> parameters = new HashMap<>();
 		parameters.put("id", film.getId());
 		parameters.put("gereserveerd", film.getGereserveerd());
-		if (template.update(UPDATE_FILM, parameters) == 0) {
+		if (template.update(UPDATE_GERESERVEERD, parameters) == 0) {
 			throw new FilmNotFoundException();
 		}
 	}
