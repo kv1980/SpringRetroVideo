@@ -31,14 +31,14 @@ public class JdbcFilmRepositoryTest extends AbstractTransactionalJUnit4SpringCon
 	@Test	
 	public void update_bestaande_film() {
 		Film film = new Film(idVanTestFilmA(),"Titel van testfilm A",1,0,BigDecimal.ONE);
-		repository.updateGereserveerd(film);;
+		repository.update(film);;
 		assertTrue(0==super.jdbcTemplate.queryForObject("select gereserveerd from films where id=?",Integer.class,idVanTestFilmA()));
 	}
 	
 	@Test (expected = FilmNotFoundException.class)
 	public void update_onbestaande_film_niet() {
 		Film film = new Film(-1,"Titel van testfilm A",1,0,BigDecimal.ONE);
-		repository.updateGereserveerd(film);
+		repository.update(film);
 	}
 	
 	@Test

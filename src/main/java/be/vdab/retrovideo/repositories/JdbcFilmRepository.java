@@ -27,7 +27,7 @@ class JdbcFilmRepository implements FilmRepository {
 	}
 	
 	@Override
-	public void updateGereserveerd(Film film) {
+	public void update(Film film) {
 		Map<String,Object> parameters = new HashMap<>();
 		parameters.put("id", film.getId());
 		parameters.put("gereserveerd", film.getGereserveerd());
