@@ -1,6 +1,6 @@
 package be.vdab.retrovideo.entities;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 
@@ -12,21 +12,28 @@ public class FilmTest {
 	
 	@Before
 	public void before() {
-		film = new Film(1L,"Titel testfilm",10,1,BigDecimal.TEN);
+		film = new Film(1L,"Titel testfilm",10,9,BigDecimal.TEN);
 	}
 	
 	@Test
-	public void geefCorrecteAantallenNaReservatie() {
-		film.verhoogAantalGereserveerdMetEen();
-		assertEquals(10,film.getVoorraad());
-		assertEquals(2,film.getGereserveerd());
-		assertEquals(8,film.toonBeschikbareExemplaren());
+	public void toonBeschikbareExemplaren_geeft_het_correcte_aantal_beschikbare_exemplaren() {
+		assertEquals(1,film.toonBeschikbareExemplaren());
 	}
 	
 	@Test
-	public void geefCorrecteGegevens() {
-		assertEquals(1L,film.getId());
-		assertEquals("Titel testfilm",film.getTitel());
-		assertEquals(BigDecimal.TEN,film.getPrijs());
+	public void na_reservatie_is_het_aantal_gereserveerde_exemplaren_met_1_verhoogd() {
+		film.reserveer();
+		assertEquals(10,film.getGereserveerd());
 	}
+	
+	@Test
+	public void isBeschikbaar_geeft_true_als_er_nog_beschikbare_exemplaren_zijn() {
+		assertTrue(film.isBeschikbaar());
+	}
+	
+	@Test
+	public void isBeschikbaar_geeft_false_als_er_geen_beschikbare_exemplaren_meer_zijn() {
+		film.reserveer();
+		assertFalse(film.isBeschikbaar());
+	}	
 }

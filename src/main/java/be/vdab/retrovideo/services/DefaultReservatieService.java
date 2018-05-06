@@ -1,5 +1,7 @@
 package be.vdab.retrovideo.services;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,26 +12,29 @@ import be.vdab.retrovideo.repositories.ReservatieRepository;
 import be.vdab.retrovideo.valueobjects.Reservatie;
 
 @Service
-@Transactional(readOnly = false, isolation = Isolation.SERIALIZABLE)
+@Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
 class DefaultReservatieService implements ReservatieService{
-	private ReservatieRepository reservatieRepository;
-	private FilmRepository filmRepository;
+	private final FilmRepository filmRepository;
+	private final ReservatieRepository reservatieRepository;
 
-	public DefaultReservatieService(ReservatieRepository reservatieRepository, FilmRepository filmRepository) {
-		this.reservatieRepository = reservatieRepository;
+	public DefaultReservatieService(FilmRepository filmRepository, ReservatieRepository reservatieRepository) {
+		super();
 		this.filmRepository = filmRepository;
+		this.reservatieRepository = reservatieRepository;
 	}
 
 	@Override
-	public String voerEenReservatieUit(Reservatie reservatie) {
+	@Transactional(readOnly = false, isolation = Isolation.SERIALIZABLE)
+	public void create(Reservatie reservatie) {
 		Film film = filmRepository.findFilmById(reservatie.getFilmId());
-		if (film.toonBeschikbareExemplaren()!=0) {
-			film.verhoogAantalGereserveerdMetEen();
-			filmRepository.update(film);
+		if (film.isBeschikbaar()) {
 			reservatieRepository.create(reservatie);
-			return "";
-		} else {
-			return film.getTitel();
 		}
+	}
+
+	@Override
+	@Transactional(readOnly = false, isolation = Isolation.READ_COMMITTED)
+	public Optional<Reservatie> read(Reservatie reservatie) {
+		return reservatieRepository.read(reservatie);
 	}
 }

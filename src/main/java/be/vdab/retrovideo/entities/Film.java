@@ -40,11 +40,15 @@ public class Film {
 		return prijs;
 	}
 	
-	public void verhoogAantalGereserveerdMetEen() {
+	public void reserveer() {
 		gereserveerd++;
 	}
 	
 	public int toonBeschikbareExemplaren() {
 		return voorraad-gereserveerd;
+	}
+	
+	public boolean isBeschikbaar() {
+		return voorraad > gereserveerd;
 	}
 }
