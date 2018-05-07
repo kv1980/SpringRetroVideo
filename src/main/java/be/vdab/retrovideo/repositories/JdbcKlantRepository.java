@@ -24,7 +24,7 @@ class JdbcKlantRepository implements KlantRepository {
 
 	@Override
 	public List<Klant> findKlantenByLetters(String letters) {
-		return template.query(SELECT_KLANTEN_BY_LETTERS, Collections.singletonMap("letters", '%' + letters + '%'),
+		return template.query(SELECT_KLANTEN_BY_LETTERS, Collections.singletonMap("letters", '%'+letters+'%'),
 				klantRowMapper);
 	}
 
