@@ -13,10 +13,10 @@
 	<nav>
 		<ul>
 			<c:forEach var='genre' items='${genres}'>
-				<c:url var='url' value="/">
-					<c:param name='genreId' value='${genre.id}'/>
-				</c:url>
-			    <li><a href='<c:url value='${url}'/>'>${genre.naam}</a></li>
+				<spring:url var='url' value='/genre/{genreId}'>
+					<spring:param name='genreId' value='${genre.id}'/>
+				</spring:url>
+			    <li><a href='<spring:url value='${url}'/>'>${genre.naam}</a></li>
 			</c:forEach>	
 		</ul>
 	</nav>

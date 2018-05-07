@@ -1,14 +1,14 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" session="false"%>
-<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
-<%@taglib prefix='spring' uri='http://www.springframework.org/tags' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
+<%@taglib prefix='spring' uri='http://www.springframework.org/tags'%>
 <%@taglib prefix='vdab' uri='http://vdab.be/tags'%>
 
 
 <!DOCTYPE html>
 <html lang='nl'>
-<vdab:head title="Reserveren"/>
+<vdab:head title="Reserveren" />
 <body>
-	<vdab:menuIndex/>
+	<vdab:menuIndex />
 	<h1>Reserveren</h1>
 	<nav>
 		<ul>
@@ -18,14 +18,38 @@
 						<li>${genre.naam}</li>
 					</c:when>
 					<c:otherwise>
-						<c:url var='url' value="/">
-							<c:param name='genreId' value='${genre.id}'/>
-						</c:url>
-						<li><a href='<c:url value='${url}'/>'>${genre.naam}</a></li>
-					</c:otherwise>	
-				</c:choose>	
-			</c:forEach>	
+						<spring:url var='url' value='/genre/{genreId}'>
+							<spring:param name='genreId' value='${genre.id}' />
+						</spring:url>
+						<li><a href='<spring:url value='${url}'/>'>${genre.naam}</a></li>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
 		</ul>
 	</nav>
+	<c:choose>
+		<c:when test='${not empty films}'>
+			<ul id="filmfiguren">
+				<c:forEach var='film' items='${films}'>
+					<spring:url var='url' value='/film/{filmId}'>
+						<spring:param name='filmId' value='${film.id}' />
+					</spring:url>
+					<li><a href='<spring:url value='${url}'/>'> 
+						<c:choose>
+							<c:when test='${film.gereserveerd<film.voorraad}'>
+								<img class="filmFiguur" src='/images/${film.id}.jpg' alt='${film.titel}' title='Er zijn nog exemplaren beschikbaar'>
+							</c:when>
+							<c:otherwise>
+								<img class="filmFiguur" src='/images/${film.id}.jpg' alt='${film.titel}' title='Er zijn geen exemplaren meer beschikbaar'>
+							</c:otherwise>
+						</c:choose>
+					</a></li>
+				</c:forEach>
+			</ul>
+		</c:when>
+		<c:otherwise>
+			<p id="geenFilmfiguren">Er zijn geen films in dit genre.</p>
+		</c:otherwise>
+	</c:choose>
 </body>
 </html>
