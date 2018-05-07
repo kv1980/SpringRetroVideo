@@ -19,9 +19,9 @@ import be.vdab.retrovideo.valueobjects.Reservatie;
 class JdbcReservatieRepository implements ReservatieRepository {
 	private final NamedParameterJdbcTemplate template;
 	private final SimpleJdbcInsert insert;
-	private static final String READ = "select klantId, filmId, reservatieTijd where klantId=:klantId AND filmId=:filmId AND reservatieTijd=:reservatietijd";
+	private static final String READ = "select klantid, filmid, reservatieDatum from reservaties where klantid=:klantid AND filmid=:filmid AND reservatieDatum=':reservatietijd'";
 	private final RowMapper<Reservatie> reservatieRowMapper = (resultSet,rowNum) -> 
-		new Reservatie(resultSet.getLong("klantId"),resultSet.getLong("filmId"),resultSet.getTimestamp("reservatieTijd").toLocalDateTime());
+		new Reservatie(resultSet.getLong("klantId"),resultSet.getLong("filmId"),resultSet.getObject("reservatieTijd"));
 	
 	
 	JdbcReservatieRepository(NamedParameterJdbcTemplate template, DataSource dataSource){
@@ -35,7 +35,7 @@ class JdbcReservatieRepository implements ReservatieRepository {
 		Map<String,Object> kolomWaarden = new HashMap<>();
 		kolomWaarden.put("klantid",reservatie.getKlantId());
 		kolomWaarden.put("filmid",reservatie.getFilmId());
-		kolomWaarden.put("reservatieDatum",reservatie.getReservatietijd());
+		kolomWaarden.put("reservatieDatum",reservatie.getReservatietijd().toString());
 		insert.execute(kolomWaarden);
 	}
 
@@ -45,7 +45,7 @@ class JdbcReservatieRepository implements ReservatieRepository {
 			Map<String,Object> parameters = new HashMap<>();
 			parameters.put("klantid",reservatie.getKlantId());
 			parameters.put("filmid",reservatie.getFilmId());
-			parameters.put("reservatieDatum",reservatie.getReservatietijd());
+			parameters.put("reservatieDatum",reservatie.getReservatietijd().toString());
 			return Optional.of(template.queryForObject(READ,parameters,reservatieRowMapper));
 		} catch (IncorrectResultSizeDataAccessException ex) {
 			return Optional.empty();
