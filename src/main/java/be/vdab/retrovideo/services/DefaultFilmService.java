@@ -13,9 +13,14 @@ import be.vdab.retrovideo.repositories.FilmRepository;
 @Transactional(readOnly = true, isolation = Isolation.READ_COMMITTED)
 class DefaultFilmService implements FilmService {
 	private final FilmRepository repository;
-	
+
 	public DefaultFilmService(FilmRepository repository) {
 		this.repository = repository;
+	}
+
+	@Override
+	public void update(Film film) {
+		repository.update(film);
 	}
 
 	@Override
