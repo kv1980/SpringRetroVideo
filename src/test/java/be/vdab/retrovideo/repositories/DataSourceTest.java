@@ -19,10 +19,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class DataSourceTest {
 	@Autowired
 	private DataSource dataSource;
-	
+
 	@Test
 	public void getConnection() throws SQLException {
-		try (Connection connection = dataSource.getConnection()){
+		try (Connection connection = dataSource.getConnection()) {
 		}
 	}
 }

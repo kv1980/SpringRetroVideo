@@ -7,8 +7,9 @@ public class Klant {
 	private final String straatNummer;
 	private final String postnummer;
 	private final String gemeente;
-	
-	public Klant(long id, String familienaam, String voornaam, String straatNummer, String postnummer, String gemeente) {
+
+	public Klant(long id, String familienaam, String voornaam, String straatNummer, String postnummer,
+			String gemeente) {
 		this.id = id;
 		this.familienaam = familienaam;
 		this.voornaam = voornaam;
@@ -16,7 +17,7 @@ public class Klant {
 		this.postnummer = postnummer;
 		this.gemeente = gemeente;
 	}
-	
+
 	public long getId() {
 		return id;
 	}

@@ -1,14 +1,16 @@
 package be.vdab.retrovideo.valueobjects;
 
+import java.time.LocalDateTime;
+
 public class Reservatie {
 	private final long klantId;
 	private final long filmId;
-	private DatumTijd reservatietijd;
-	
-	public Reservatie(long klantId, long filmId, Object datumTijd) {
+	private LocalDateTime reservatietijd;
+
+	public Reservatie(long klantId, long filmId) {
 		this.klantId = klantId;
 		this.filmId = filmId;
-		this.reservatietijd = (DatumTijd) datumTijd;
+		this.reservatietijd = LocalDateTime.now();
 	}
 
 	public long getKlantId() {
@@ -17,9 +19,9 @@ public class Reservatie {
 
 	public long getFilmId() {
 		return filmId;
-	}	
-	
-	public DatumTijd getReservatietijd() {
+	}
+
+	public LocalDateTime getReservatietijd() {
 		return reservatietijd;
 	}
 }

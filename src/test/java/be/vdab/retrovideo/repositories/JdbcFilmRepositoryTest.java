@@ -27,22 +27,24 @@ import be.vdab.retrovideo.exceptions.FilmNotFoundException;
 public class JdbcFilmRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Autowired
 	private JdbcFilmRepository repository;
-	
-	@Test	
+
+	@Test
 	public void update_bestaande_film() {
-		Film film = new Film(idVanTestFilmA(),"Titel van testfilm A",1,0,BigDecimal.ONE);
-		repository.update(film);;
-		assertTrue(0==super.jdbcTemplate.queryForObject("select gereserveerd from films where id=?",Integer.class,idVanTestFilmA()));
+		Film film = new Film(idVanTestFilmA(), "Titel van testfilm A", 1, 0, BigDecimal.ONE);
+		repository.update(film);
+		;
+		assertTrue(0 == super.jdbcTemplate.queryForObject("select gereserveerd from films where id=?", Integer.class,
+				idVanTestFilmA()));
 	}
-	
-	@Test (expected = FilmNotFoundException.class)
+
+	@Test(expected = FilmNotFoundException.class)
 	public void update_onbestaande_film_niet() {
-		Film film = new Film(-1,"Titel van testfilm A",1,0,BigDecimal.ONE);
+		Film film = new Film(-1, "Titel van testfilm A", 1, 0, BigDecimal.ONE);
 		repository.update(film);
 	}
-	
+
 	@Test
-	public void findFilmsByGenreId_vindt_een_juiste_films() {
+	public void findFilmsByGenreId_vindt_juiste_films() {
 		List<Film> films = repository.findFilmsByGenreId(1L);
 		int indexA = -1;
 		for (Film film : films) {
@@ -50,11 +52,11 @@ public class JdbcFilmRepositoryTest extends AbstractTransactionalJUnit4SpringCon
 				indexA = films.indexOf(film);
 			}
 		}
-		assertFalse(indexA==-1);
+		assertFalse(indexA == -1);
 	}
-	
+
 	@Test
-	public void findFilmsByGenreId_vindt_een_foutieve_film_niet() {
+	public void findFilmsByGenreId_vindt_foutieve_films_niet() {
 		List<Film> films = repository.findFilmsByGenreId(1L);
 		int indexC = -1;
 		for (Film film : films) {
@@ -62,9 +64,9 @@ public class JdbcFilmRepositoryTest extends AbstractTransactionalJUnit4SpringCon
 				indexC = films.indexOf(film);
 			}
 		}
-		assertTrue(indexC==-1);
+		assertTrue(indexC == -1);
 	}
-	
+
 	@Test
 	public void findFilmsByGenreId_ordent_films_zoals_gevraagd() {
 		List<Film> films = repository.findFilmsByGenreId(1L);
@@ -72,27 +74,27 @@ public class JdbcFilmRepositoryTest extends AbstractTransactionalJUnit4SpringCon
 		int indexB = -1;
 		for (Film film : films) {
 			switch (film.getTitel()) {
-				case "Titel van testfilm A":
-					indexA = films.indexOf(film);
-					break;
-				case "Titel van testfilm B":	
-					indexB = films.indexOf(film);
-					break;
+			case "Titel van testfilm A":
+				indexA = films.indexOf(film);
+				break;
+			case "Titel van testfilm B":
+				indexB = films.indexOf(film);
+				break;
 			}
 		}
-		assertTrue(indexA<indexB);	
+		assertTrue(indexA < indexB);
 	}
-	
+
 	@Test
-	public void find_film_by_id() {
+	public void findFilmById_vindt_de_juiste_film() {
 		Film film = repository.findFilmById(idVanTestFilmA());
-		assertTrue(film.getId()==idVanTestFilmA());
-		assertEquals(film.getTitel(),"Titel van testfilm A");
-		assertTrue(film.getVoorraad()==1);
-		assertTrue(film.getGereserveerd()==1);
-		assertEquals(0,film.getPrijs().compareTo(BigDecimal.ONE));
+		assertTrue(film.getId() == idVanTestFilmA());
+		assertEquals(film.getTitel(), "Titel van testfilm A");
+		assertTrue(film.getVoorraad() == 1);
+		assertTrue(film.getGereserveerd() == 1);
+		assertEquals(0, film.getPrijs().compareTo(BigDecimal.ONE));
 	}
-	
+
 	private long idVanTestFilmA() {
 		return super.jdbcTemplate.queryForObject("select id from films where titel='Titel van testfilm A'", Long.class);
 	}

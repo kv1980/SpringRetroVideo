@@ -25,30 +25,30 @@ import be.vdab.retrovideo.entities.Genre;
 public class JdbcGenreRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Autowired
 	private JdbcGenreRepository repository;
-	
-	@Test 
+
+	@Test
 	public void findAll_vindt_alle_genres() {
 		List<Genre> genres = repository.findAll();
-		assertEquals(super.countRowsInTable("genres"),genres.size());		
+		assertEquals(super.countRowsInTable("genres"), genres.size());
 	}
-	
-	@Test 
+
+	@Test
 	public void findAll_ordent_genres_zoals_gevraagd() {
 		List<Genre> genres = repository.findAll();
 		int indexA = -1;
 		int indexB = -1;
 		for (Genre genre : genres) {
 			switch (genre.getNaam()) {
-				case "testgenre A":
-					indexA = genres.indexOf(genre);
-					break;
-				case "testgenre B":	
-					indexB = genres.indexOf(genre);
-					break;
+			case "testgenre A":
+				indexA = genres.indexOf(genre);
+				break;
+			case "testgenre B":
+				indexB = genres.indexOf(genre);
+				break;
 			}
-		}		
-		assertTrue(indexA!=-1);
-		assertTrue(indexB!=-1);
-		assertTrue(indexA<indexB);	
+		}
+		assertTrue(indexA != -1);
+		assertTrue(indexB != -1);
+		assertTrue(indexA < indexB);
 	}
 }

@@ -18,31 +18,31 @@ class JdbcFilmRepository implements FilmRepository {
 	private static final String UPDATE_GERESERVEERD = "update films set gereserveerd=:gereserveerd where id=:id";
 	private static final String SELECT_FILMS_BY_GENREID = "select id, titel, voorraad, gereserveerd, prijs from films where genreId=:genreId order by titel";
 	private static final String SELECT_FILM_BY_ID = "select id, titel, voorraad, gereserveerd, prijs from films where id=:id";
-	private final RowMapper<Film> filmRowMapper =
-			(resultSet,rowNum) -> new Film(resultSet.getLong("id"),resultSet.getString("titel"),resultSet.getInt("voorraad"),
-										   resultSet.getInt("gereserveerd"),resultSet.getBigDecimal("prijs"));		
-			
+	private final RowMapper<Film> filmRowMapper = (resultSet, rowNum) -> new Film(resultSet.getLong("id"),
+			resultSet.getString("titel"), resultSet.getInt("voorraad"), resultSet.getInt("gereserveerd"),
+			resultSet.getBigDecimal("prijs"));
+
 	public JdbcFilmRepository(NamedParameterJdbcTemplate template) {
 		this.template = template;
 	}
-	
+
 	@Override
 	public void update(Film film) {
-		Map<String,Object> parameters = new HashMap<>();
+		Map<String, Object> parameters = new HashMap<>();
 		parameters.put("id", film.getId());
 		parameters.put("gereserveerd", film.getGereserveerd());
 		if (template.update(UPDATE_GERESERVEERD, parameters) == 0) {
 			throw new FilmNotFoundException();
 		}
 	}
-	
+
 	@Override
 	public List<Film> findFilmsByGenreId(long genreId) {
-		return template.query(SELECT_FILMS_BY_GENREID,Collections.singletonMap("genreId",genreId),filmRowMapper);
+		return template.query(SELECT_FILMS_BY_GENREID, Collections.singletonMap("genreId", genreId), filmRowMapper);
 	}
-		
+
 	@Override
 	public Film findFilmById(long filmId) {
-		return template.queryForObject(SELECT_FILM_BY_ID,Collections.singletonMap("id",filmId),filmRowMapper);
+		return template.queryForObject(SELECT_FILM_BY_ID, Collections.singletonMap("id", filmId), filmRowMapper);
 	}
 }
