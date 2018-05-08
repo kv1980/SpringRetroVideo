@@ -23,12 +23,12 @@
 		<dd>${film.voorraad-film.gereserveerd}</dd>
 	</dl>
 	<c:if test='${(film.voorraad-filmgereserveerd)>0}'>
-		<form:form action='/film' modelAttribute='mandjeForm' method='post' id='filmform'>
+		<form:form action='/film' modelAttribute='mandjeForm' method='post' id='form'>
 			<input type='hidden' name='filmId' value='${film.id}'>
 			<input type='submit' value='In Mandje' id='toevoegknop'>
 		</form:form>
 		<script>
-			document.getElementById('filmform').onsubmit = function() {
+			document.getElementById('form').onsubmit = function() {
 				document.getElementById('toevoegknop').disabled = true;
 			}
 		</script>

@@ -81,3 +81,7 @@ dd {
     text-align: center;
 }
 
+#filmsInMandje th:nth-child(3), #filmsInMandje td:nth-child(3) {
+    width:100px;
+    text-align: center;
+}
