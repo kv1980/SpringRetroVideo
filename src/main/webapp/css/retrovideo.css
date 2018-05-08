@@ -52,7 +52,7 @@ dt {
 }
 
 dd {
-    display: block;
+    display: inline-block;
     margin-bottom: 20px;
     font-weight: bold;
 }
@@ -73,7 +73,9 @@ dd {
 }
 
 #filmsInMandje th:nth-child(1), #filmsInMandje td:nth-child(1) {
+	padding-left:20px;
     width:300px;
+    text-align: left;
 }
 
 #filmsInMandje th:nth-child(2), #filmsInMandje td:nth-child(2) {
