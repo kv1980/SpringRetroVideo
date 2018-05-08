@@ -3,6 +3,7 @@ package be.vdab.retrovideo.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -11,17 +12,27 @@ import be.vdab.retrovideo.services.FilmService;
 @Controller 				
 @RequestMapping("/film") 
 class FilmController {
+	private final Mandje mandje;
 	private final FilmService filmService;
 	private final static String FILM_VIEW = "film";
+	private final static String REDIRECT_NAAR_MANDJE ="redirect:/mandje";
 
 
-	public FilmController(FilmService filmService) {
+	public FilmController(FilmService filmService, Mandje mandje) {
 		this.filmService = filmService;
+		this.mandje = mandje;
 	}
 	
 	@GetMapping("{filmId}")
-	ModelAndView index(@PathVariable long filmId) {
-		ModelAndView modelAndView = new ModelAndView(FILM_VIEW,"film",filmService.findFilmById(filmId));
+	ModelAndView filmVoorMandje(@PathVariable long filmId) {
+		ModelAndView modelAndView = new ModelAndView(FILM_VIEW)
+				.addObject("film",filmService.findFilmById(filmId));
 		return modelAndView;
+	}
+	
+	@PostMapping("{filmId}")
+	ModelAndView voegFilmToeAanMandje(@PathVariable long filmId) {
+		mandje.addFilmId(filmId);
+		return new ModelAndView(REDIRECT_NAAR_MANDJE);
 	}
 }

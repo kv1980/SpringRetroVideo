@@ -37,10 +37,10 @@
 					<li><a href='<spring:url value='${url}'/>'> 
 						<c:choose>
 							<c:when test='${film.gereserveerd<film.voorraad}'>
-								<img class="filmFiguur" src='/images/${film.id}.jpg' alt='${film.titel}' title='Er zijn nog exemplaren beschikbaar'>
+								<img class="filmFiguur" src='/images/${film.id}.jpg' alt='${film.titel}' title='reservatie mogelijk'>
 							</c:when>
 							<c:otherwise>
-								<img class="filmFiguur" src='/images/${film.id}.jpg' alt='${film.titel}' title='Er zijn geen exemplaren meer beschikbaar'>
+								<img class="filmFiguur" src='/images/${film.id}.jpg' alt='${film.titel}' title='reservatie niet mogelijk'>
 							</c:otherwise>
 						</c:choose>
 					</a></li>
