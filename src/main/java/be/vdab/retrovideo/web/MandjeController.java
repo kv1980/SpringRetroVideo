@@ -47,7 +47,7 @@ class MandjeController {
 				.addObject("totaalprijs",totaalprijs);	
 	}
 	
-	@PostMapping(params = "teVerwijderenFilmIds")
+	@GetMapping(params = "teVerwijderenFilmIds")
 	String verwijderFilmsUitMandje(long[] teVerwijderenFilmIds) {
 		for(long filmId : teVerwijderenFilmIds) {
 			mandje.removeFilmId(filmId);

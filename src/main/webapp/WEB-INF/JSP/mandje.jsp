@@ -11,7 +11,7 @@
 <body>
 	<vdab:menuMandje/>
 	<h1>Mandje</h1>
-	<form action='/mandje' method='post' id='form'>
+	<form action='/mandje' method='get' id='form'>
 	<table id="filmsInMandje">
 		<tr>
 			<th>Film</th>
