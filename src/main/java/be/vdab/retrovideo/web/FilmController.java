@@ -15,7 +15,7 @@ class FilmController {
 	private final Mandje mandje;
 	private final FilmService filmService;
 	private final static String FILM_VIEW = "film";
-	private final static String REDIRECT_NAAR_MANDJE ="redirect:/mandje";
+	private final static String REDIRECT_NA_TOEVOEGEN ="redirect:/mandje";
 
 
 	public FilmController(FilmService filmService, Mandje mandje) {
@@ -30,9 +30,9 @@ class FilmController {
 		return modelAndView;
 	}
 	
-	@PostMapping("{filmId}")
-	ModelAndView voegFilmToeAanMandje(@PathVariable long filmId) {
-		mandje.addFilmId(filmId);
-		return new ModelAndView(REDIRECT_NAAR_MANDJE);
+	@PostMapping
+	String voegFilmtoeAanMandje(MandjeForm form) {
+		mandje.addFilmId(form.getFilmId());
+		return REDIRECT_NA_TOEVOEGEN;
 	}
 }

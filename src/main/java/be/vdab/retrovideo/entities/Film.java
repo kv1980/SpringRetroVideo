@@ -9,7 +9,7 @@ public class Film {
 	private final String titel;
 	private int voorraad;
 	private int gereserveerd;
-	@NumberFormat(pattern = "0.00")
+	@NumberFormat(pattern = "€ 0.00")
 	private final BigDecimal prijs;
 
 	public Film(long id, String titel, int voorraad, int gereserveerd, BigDecimal prijs) {

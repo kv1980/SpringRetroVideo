@@ -1,6 +1,7 @@
 package be.vdab.retrovideo.web;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -27,5 +28,5 @@ class DefaultMandje implements Serializable, Mandje {
 	@Override
 	public Set<Long> getFilmIds() {
 		return filmIds;
-	}
+	}	
 }

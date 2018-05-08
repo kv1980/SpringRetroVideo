@@ -14,7 +14,7 @@
 	<img id="filmfiguur" src='/images/${film.id}.jpg' alt='${film.titel}'>
 	<dl>
 		<dt>Prijs</dt>
-		<dd>€ ${film.prijs}</dd>
+		<dd><spring:eval expression='film.prijs'/></dd>
 		<dt>Voorraad</dt>
 		<dd>${film.voorraad}</dd>
 		<dt>Gereserveerd</dt>
@@ -23,8 +23,9 @@
 		<dd>${film.voorraad-film.gereserveerd}</dd>
 	</dl>
 	<c:if test='${(film.voorraad-filmgereserveerd)>0}'>
-		<form:form action='/film' method='post' id='filmform'>
-			<button id='toevoegknop' name='filmId' type='submit' value='${film.id}'>In Mandje</button>
+		<form:form action='/film' modelAttribute='mandjeForm' method='post' id='filmform'>
+			<input type='hidden' name='filmId' value='${film.id}'>
+			<input type='submit' value='In Mandje' id='toevoegknop'>
 		</form:form>
 		<script>
 			document.getElementById('filmform').onsubmit = function() {

@@ -1,10 +1,12 @@
 package be.vdab.retrovideo.web;
 
+import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -34,16 +36,20 @@ class MandjeController {
 	
 	@GetMapping
 	ModelAndView toonMandje() {
+		Set<Film> filmsInMandje = maakFilmsVanFilmIds(mandje.getFilmIds());
+		BigDecimal totalePrijs = filmsInMandje.stream()
+											  .map(film -> film.getPrijs())
+											  .reduce(BigDecimal.ZERO,(vorigeSom,getal) -> vorigeSom.add(getal));	
 		return new ModelAndView(VIEW)
 				.addObject(new MandjeForm())
-				.addObject("filmsInMandje",maakFilmsVanFilmIds(mandje.getFilmIds()));
+				.addObject("filmsInMandje",filmsInMandje)
+				.addObject("totalePrijs",totalePrijs);	
 	}
 	
-	@GetMapping
-	ModelAndView verwijderFilmUitMandje() {
-		return new ModelAndView(VIEW)
-				.addObject(new MandjeForm())
-				.addObject("filmsInMandje",maakFilmsVanFilmIds(mandje.getFilmIds()));
+	@PostMapping
+	String verwijderFilmUitMandje(MandjeForm form) {
+		mandje.removeFilmId(form.getFilmId());
+		return REDIRECT_NA_VERWIJDEREN;
 	}
 	
 
