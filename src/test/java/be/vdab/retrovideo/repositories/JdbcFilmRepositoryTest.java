@@ -23,6 +23,7 @@ import be.vdab.retrovideo.exceptions.FilmNotFoundException;
 @JdbcTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @Import(JdbcFilmRepository.class)
+@Sql("/insertGenres.sql")
 @Sql("/insertFilms.sql")
 public class JdbcFilmRepositoryTest extends AbstractTransactionalJUnit4SpringContextTests {
 	@Autowired
@@ -33,8 +34,8 @@ public class JdbcFilmRepositoryTest extends AbstractTransactionalJUnit4SpringCon
 		Film film = new Film(idVanTestFilmA(), "Titel van testfilm A", 1, 0, BigDecimal.ONE);
 		repository.update(film);
 		;
-		assertTrue(0 == super.jdbcTemplate.queryForObject("select gereserveerd from films where id=?", Integer.class,
-				idVanTestFilmA()));
+		assertEquals(0,super.jdbcTemplate.queryForObject("select gereserveerd from films where id=?", Integer.class,
+				idVanTestFilmA()).intValue());
 	}
 
 	@Test(expected = FilmNotFoundException.class)
@@ -45,7 +46,7 @@ public class JdbcFilmRepositoryTest extends AbstractTransactionalJUnit4SpringCon
 
 	@Test
 	public void findFilmsByGenreId_vindt_juiste_films() {
-		List<Film> films = repository.findFilmsByGenreId(1L);
+		List<Film> films = repository.findFilmsByGenreId(idVanTestGenre());
 		int indexA = -1;
 		for (Film film : films) {
 			if (film.getTitel().equals("Titel van testfilm A")) {
@@ -57,7 +58,7 @@ public class JdbcFilmRepositoryTest extends AbstractTransactionalJUnit4SpringCon
 
 	@Test
 	public void findFilmsByGenreId_vindt_foutieve_films_niet() {
-		List<Film> films = repository.findFilmsByGenreId(1L);
+		List<Film> films = repository.findFilmsByGenreId(idVanTestGenre());
 		int indexC = -1;
 		for (Film film : films) {
 			if (film.getTitel().equals("Titel van testfilm C")) {
@@ -69,7 +70,7 @@ public class JdbcFilmRepositoryTest extends AbstractTransactionalJUnit4SpringCon
 
 	@Test
 	public void findFilmsByGenreId_ordent_films_zoals_gevraagd() {
-		List<Film> films = repository.findFilmsByGenreId(1L);
+		List<Film> films = repository.findFilmsByGenreId(idVanTestGenre());
 		int indexA = -1;
 		int indexB = -1;
 		for (Film film : films) {
@@ -98,4 +99,8 @@ public class JdbcFilmRepositoryTest extends AbstractTransactionalJUnit4SpringCon
 	private long idVanTestFilmA() {
 		return super.jdbcTemplate.queryForObject("select id from films where titel='Titel van testfilm A'", Long.class);
 	}
+	private long idVanTestGenre() {
+		return super.jdbcTemplate.queryForObject("select id from genres where naam='testgenre B'", Long.class);
+	}
+
 }
