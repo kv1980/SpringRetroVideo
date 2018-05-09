@@ -27,7 +27,7 @@ public class Klant {
 	}
 	
 	public String getNaam() {
-		return familienaam+" "+voornaam;
+		return voornaam+" "+familienaam;
 	}
 
 	public String getVoornaam() {

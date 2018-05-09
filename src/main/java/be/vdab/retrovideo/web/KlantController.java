@@ -17,42 +17,29 @@ import be.vdab.retrovideo.services.KlantService;
 @RequestMapping("/klant")
 class KlantController {
 	private final KlantService klantService;
-	private final Mandje mandje;
-	private final Identificatie identificatie;
-	
-	private final static String KLANTEN_VIEW = "klant";
-	private final static String REDIRECT_NA_BEVESTIGING = "redirect:/bestelling";
+	private final static String KLANT_VIEW = "klant";
 
-	public KlantController(KlantService klantService,Mandje mandje,Identificatie identificatie) {
+	public KlantController(KlantService klantService) {
 		this.klantService = klantService;
-		this.mandje = mandje;
-		this.identificatie = identificatie;
 	}
 	
 	@GetMapping
-	ModelAndView voorZoekenOpFamilienaam() {
-		return new ModelAndView(KLANTEN_VIEW).addObject(new KlantForm());
+	ModelAndView voorSubmitFamilienaam() {
+		return new ModelAndView(KLANT_VIEW).addObject(new KlantForm());
 	}
 
 	@GetMapping(params = "letters")
-	ModelAndView voorKeuzeKlant(@Valid KlantForm form, BindingResult bindingResult) {
-		ModelAndView modelAndView = new ModelAndView(KLANTEN_VIEW);
+	ModelAndView naSubmitFamilienaam(@Valid KlantForm form, BindingResult bindingResult) {
+		ModelAndView modelAndView = new ModelAndView(KLANT_VIEW);
 		if (bindingResult.hasErrors()) {
 			return modelAndView;
 		}
 		List<Klant> klanten = klantService.findKlantenByLetters(form.getLetters());
 		if (klanten.isEmpty()) {
-			System.out.println("deze is leeg");
 			bindingResult.reject("geenKlanten");
 		} else {
 			modelAndView.addObject("klanten",klanten);
 		}
 		return modelAndView;
-	}
-	
-	@GetMapping(params = "id")
-		ModelAndView naKeuzeKlant(Long id) {
-			identificatie.setKlantId(id);
-			return new ModelAndView(REDIRECT_NA_BEVESTIGING);
 	}
 }

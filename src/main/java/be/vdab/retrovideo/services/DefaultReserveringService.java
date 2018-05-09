@@ -5,19 +5,20 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import be.vdab.retrovideo.entities.Film;
+import be.vdab.retrovideo.entities.Klant;
 import be.vdab.retrovideo.valueobjects.Reservatie;
 
 @Service
 @Transactional(readOnly = false, isolation = Isolation.SERIALIZABLE)
 class DefaultReserveringService implements ReserveringService {
 	private final FilmService filmService;
-	private final ReservatieService reservatieService;
 	private final KlantService klantService;
+	private final ReservatieService reservatieService; 
 
-	public DefaultReserveringService(FilmService filmService, ReservatieService reservatieService, KlantService klantService) {
+	public DefaultReserveringService(FilmService filmService, KlantService klantService, ReservatieService reservatieService) {
 		this.filmService = filmService;
-		this.reservatieService = reservatieService;
 		this.klantService = klantService;
+		this.reservatieService = reservatieService;
 	}
 
 	@Override
@@ -32,10 +33,16 @@ class DefaultReserveringService implements ReserveringService {
 			return false;
 		}
 	}
+	
+	@Override
+	public Klant getKlant(long klantId) {
+		return klantService.findKlantById(klantId);
+	}
 
 	@Override
-	public String getKlantnaam(long klantId) {
-		klantService.
-		return null;
+	public Film getFilm(long filmId) {
+		return filmService.findFilmById(filmId);
 	}
+
+
 }

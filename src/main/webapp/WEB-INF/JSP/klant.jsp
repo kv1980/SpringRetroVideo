@@ -33,9 +33,9 @@
 			</tr>
 			<c:forEach var='klant' items='${klanten}'>
 				<tr>
-					<c:url value='/klant' var='url'>   
-						<c:param name='id' value='${klant.id}'/>
-					</c:url>
+					<spring:url value='/bestelling/bevestigen/{klantId}' var='url'>   
+						<spring:param name='klantId' value='${klant.id}'/>
+					</spring:url>
 					<td><a href='${url}'>${klant.naam}</a></td>
 					<td>${klant.straatNummer}</td>
 					<td>${klant.postnummer}</td>
