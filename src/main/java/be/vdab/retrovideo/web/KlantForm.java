@@ -15,5 +15,5 @@ public class KlantForm {
 
 	public void setLetters(String letters) {
 		this.letters = letters;
-	}	
+	}
 }

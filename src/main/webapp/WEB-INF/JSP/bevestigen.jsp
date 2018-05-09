@@ -7,18 +7,20 @@
 
 <!DOCTYPE html>
 <html lang='nl'>
-<vdab:head title="bevestigen"/>
+<vdab:head title='bevestigen'/>
 <body>
 	<vdab:menuMandje/>
 	<h1>Bevestigen</h1>
-	<p>${aantalFilms} film(s) voor ${klantNaam}</p>
-	
-	<form action='/rapport' method='get' id='form'>
-		<input type='submit' name='teVerwijderenFilmIds' value='${filmInMandje.id}'/></td>
+	<p>${aantalFilms} film(s) voor ${klant.naam}</p>
+	<spring:url value='/bestelling/rapport/{klantId}' var='url'>   
+		<spring:param name='klantId' value='${klant.id}'/>
+	</spring:url>
+	<form action='${url}' method='get' id='form'>
+		<input type='submit' value='Bevestig' id='knop'>
 	</form>
 	<script>
 		document.getElementById('form').onsubmit = function() {
-			document.getElementById('verwijderknop').disabled = true;
+			document.getElementById('knop').disabled = true;
 		}
 	</script>
 </body>

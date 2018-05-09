@@ -7,8 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import be.vdab.retrovideo.services.GenreService;
 
-@Controller 				
-@RequestMapping("/") 
+@Controller
+@RequestMapping("/")
 class IndexController {
 	private final GenreService genreService;
 	private final static String INDEX_VIEW = "index";
@@ -20,7 +20,7 @@ class IndexController {
 	@GetMapping
 	ModelAndView index() {
 		ModelAndView modelAndView = new ModelAndView(INDEX_VIEW);
-		modelAndView.addObject("genres",genreService.findAll());
+		modelAndView.addObject("genres", genreService.findAll());
 		return modelAndView;
 	}
 }

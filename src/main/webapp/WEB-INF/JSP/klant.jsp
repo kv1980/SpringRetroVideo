@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 <html lang='nl'>
-<vdab:head title="Klanten"/>
+<vdab:head title='klant'/>
 <body>
 	<vdab:menuMandje/>
 	<h1>Klanten</h1>

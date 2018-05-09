@@ -1,7 +1,6 @@
 package be.vdab.retrovideo.web;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -15,12 +14,12 @@ class DefaultMandje implements Serializable, Mandje {
 	private final Set<Long> filmIds = new LinkedHashSet<>();
 
 	@Override
-	public void addFilmId(long filmId) {
+	public void voegFilmIdtoe(long filmId) {
 		filmIds.add(filmId);
 	}
 
 	@Override
-	public void removeFilmId(long filmId) {
+	public void verwijderFilmId(long filmId) {
 		filmIds.remove(filmId);
 
 	}
@@ -28,5 +27,5 @@ class DefaultMandje implements Serializable, Mandje {
 	@Override
 	public Set<Long> getFilmIds() {
 		return filmIds;
-	}	
+	}
 }

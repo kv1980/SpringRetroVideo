@@ -22,7 +22,7 @@ class KlantController {
 	public KlantController(KlantService klantService) {
 		this.klantService = klantService;
 	}
-	
+
 	@GetMapping
 	ModelAndView voorSubmitFamilienaam() {
 		return new ModelAndView(KLANT_VIEW).addObject(new KlantForm());
@@ -38,7 +38,7 @@ class KlantController {
 		if (klanten.isEmpty()) {
 			bindingResult.reject("geenKlanten");
 		} else {
-			modelAndView.addObject("klanten",klanten);
+			modelAndView.addObject("klanten", klanten);
 		}
 		return modelAndView;
 	}

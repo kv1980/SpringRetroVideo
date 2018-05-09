@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 <html lang='nl'>
-<vdab:head title="Reserveren" />
+<vdab:head title='film'/>
 <body>
 	<vdab:menuIndex />
 	<h1>${film.titel}</h1>

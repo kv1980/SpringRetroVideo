@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 <html lang='nl'>
-<vdab:head title="Reserveren"/>
+<vdab:head title='mandje'/>
 <body>
 	<vdab:menuMandje/>
 	<h1>Mandje</h1>
