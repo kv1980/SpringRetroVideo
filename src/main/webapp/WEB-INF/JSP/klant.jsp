@@ -11,7 +11,8 @@
 <body>
 	<vdab:menuMandje/>
 	<h1>Klanten</h1>
-	<form:form action='/klant' modelAttribute='klantForm' method='get' id='zoekKlantenform'>
+	<c:url value='/klant' var='url'/>   
+	<form:form action='${url}' modelAttribute='klantForm' method='get' id='zoekKlantenform'>
 		<form:label path='letters'>Familienaam bevat: <form:errors path='letters'/></form:label>
 		<form:input path='letters' autofocus='autofocus' required='required' type='text'/>
 		<input type='submit' value='Zoeken' id='knop'>
@@ -32,7 +33,10 @@
 			</tr>
 			<c:forEach var='klant' items='${klanten}'>
 				<tr>
-					<td>${klant.naam}</td>
+					<c:url value='/klant' var='url'>   
+						<c:param name='id' value='${klant.id}'/>
+					</c:url>
+					<td><a href='${url}'>${klant.naam}</a></td>
 					<td>${klant.straatNummer}</td>
 					<td>${klant.postnummer}</td>
 					<td>${klant.gemeente}</td>

@@ -78,29 +78,33 @@ table tr th {
     text-align: left;
 }
 
-#filmsInMandje th:nth-child(2), #filmsInMandje td:nth-child(2)
+#filmsInMandje th:nth-child(2), #filmsInMandje td:nth-child(2),
 #filmsInMandje th:nth-child(3), #filmsInMandje td:nth-child(3) {
     width:100px;
     text-align: center;
 }
 
-#gevondenKlanten th:nth-child(1), gevondenKlanten td:nth-child(1)
-#gevondenKlanten th:nth-child(2), gevondenKlanten td:nth-child(2)
-#gevondenKlanten th:nth-child(4), gevondenKlanten td:nth-child(4) {
+#gevondenKlanten{
+	margin-top:40px;
+}
+
+#gevondenKlanten th:nth-child(1), #gevondenKlanten td:nth-child(1),
+#gevondenKlanten th:nth-child(2), #gevondenKlanten td:nth-child(2),
+#gevondenKlanten th:nth-child(4), #gevondenKlanten td:nth-child(4) {
 	padding-left:20px;
     width:300px;
     text-align: left;
 }
 
-#gevondenKlanten th:nth-child(1), gevondenKlanten td:nth-child(1)
-#gevondenKlanten th:nth-child(2), gevondenKlanten td:nth-child(2)
-#gevondenKlanten th:nth-child(4), gevondenKlanten td:nth-child(4) {
+#gevondenKlanten th:nth-child(1), #gevondenKlanten td:nth-child(1),
+#gevondenKlanten th:nth-child(2), #gevondenKlanten td:nth-child(2),
+#gevondenKlanten th:nth-child(4), #gevondenKlanten td:nth-child(4) {
 	padding-left:20px;
-    width:300px;
+    width:200px;
     text-align: left;
 }
 
-#gevondenKlanten th:nth-child(3), gevondenKlanten td:nth-child(3) {
+#gevondenKlanten th:nth-child(3), #gevondenKlanten td:nth-child(3) {
 	padding-left:20px;
     width:100px;
     text-align: center;

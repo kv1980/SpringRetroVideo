@@ -20,9 +20,9 @@
 		<dt>Gereserveerd</dt>
 		<dd>${film.gereserveerd}</dd>
 		<dt>Beschikbaar</dt>
-		<dd>${film.voorraad-film.gereserveerd}</dd>
+		<dd>${film.aantalBeschikbaar}</dd>
 	</dl>
-	<c:if test='${(film.voorraad-filmgereserveerd)>0}'>
+	<c:if test='${film.beschikbaar}'>
 		<form:form action='/film' modelAttribute='mandjeForm' method='post' id='form'>
 			<input type='hidden' name='filmId' value='${film.id}'>
 			<input type='submit' value='In Mandje' id='toevoegknop'>

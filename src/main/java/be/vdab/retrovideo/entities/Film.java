@@ -44,7 +44,7 @@ public class Film {
 		gereserveerd++;
 	}
 
-	public int toonBeschikbareExemplaren() {
+	public int getAantalBeschikbaar() {
 		return voorraad - gereserveerd;
 	}
 

@@ -12,26 +12,29 @@ import org.springframework.web.servlet.ModelAndView;
 
 import be.vdab.retrovideo.entities.Klant;
 import be.vdab.retrovideo.services.KlantService;
+import be.vdab.retrovideo.services.ReserveringService;
 
 @Controller
-@RequestMapping("/klant")
-class KlantController {
-	private final KlantService klantService;
+@RequestMapping("/bestelling")
+class BestellingController {
+	private final ReserveringService reserveringService;
 	private final Mandje mandje;
 	private final Identificatie identificatie;
 	
-	private final static String KLANTEN_VIEW = "klant";
-	private final static String REDIRECT_NA_BEVESTIGING = "redirect:/bestelling";
-
-	public KlantController(KlantService klantService,Mandje mandje,Identificatie identificatie) {
-		this.klantService = klantService;
+	private final static String BEVESTIGEN_VIEW = "klant";
+	private final static String RAPPOERT_VIEW = "redirect:/bestelling";
+	
+	public BestellingController(ReserveringService reserveringService, Mandje mandje, Identificatie identificatie) {
+		this.reserveringService = reserveringService;
 		this.mandje = mandje;
 		this.identificatie = identificatie;
 	}
-	
+
 	@GetMapping
-	ModelAndView voorZoekenOpFamilienaam() {
-		return new ModelAndView(KLANTEN_VIEW).addObject(new KlantForm());
+	ModelAndView bevestigen() {
+		return new ModelAndView(BEVESTIGEN_VIEW)
+				.addObject("aantalFilms",mandje.getFilmIds().size());
+				.addObject("naamKlant",reserveringService.identificatie.getKlantId())
 	}
 
 	@GetMapping(params = "letters")

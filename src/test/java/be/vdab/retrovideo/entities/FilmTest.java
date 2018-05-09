@@ -16,8 +16,8 @@ public class FilmTest {
 	}
 
 	@Test
-	public void toonBeschikbareExemplaren_geeft_het_correcte_aantal_beschikbare_exemplaren() {
-		assertEquals(1, film.toonBeschikbareExemplaren());
+	public void getAantalBeschikbaar_geeft_het_correcte_aantal_beschikbare_exemplaren() {
+		assertEquals(1, film.getAantalBeschikbaar());
 	}
 
 	@Test
