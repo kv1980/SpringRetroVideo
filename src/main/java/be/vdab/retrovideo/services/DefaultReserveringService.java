@@ -13,9 +13,10 @@ import be.vdab.retrovideo.valueobjects.Reservatie;
 class DefaultReserveringService implements ReserveringService {
 	private final FilmService filmService;
 	private final KlantService klantService;
-	private final ReservatieService reservatieService; 
+	private final ReservatieService reservatieService;
 
-	public DefaultReserveringService(FilmService filmService, KlantService klantService, ReservatieService reservatieService) {
+	public DefaultReserveringService(FilmService filmService, KlantService klantService,
+			ReservatieService reservatieService) {
 		this.filmService = filmService;
 		this.klantService = klantService;
 		this.reservatieService = reservatieService;
@@ -33,7 +34,7 @@ class DefaultReserveringService implements ReserveringService {
 			return false;
 		}
 	}
-	
+
 	@Override
 	public Klant getKlant(long klantId) {
 		return klantService.findKlantById(klantId);
@@ -43,6 +44,4 @@ class DefaultReserveringService implements ReserveringService {
 	public Film getFilm(long filmId) {
 		return filmService.findFilmById(filmId);
 	}
-
-
 }

@@ -6,7 +6,7 @@
 
 <!DOCTYPE html>
 <html lang='nl'>
-<vdab:head title='genre'/>
+<vdab:head title='genre' />
 <body>
 	<vdab:menuIndex />
 	<h1>Reserveren</h1>
@@ -34,15 +34,16 @@
 					<spring:url var='url' value='/film/{filmId}'>
 						<spring:param name='filmId' value='${film.id}' />
 					</spring:url>
-					<li><a href='<spring:url value='${url}'/>'> 
-						<c:choose>
-							<c:when test='${film.gereserveerd<film.voorraad}'>
-								<img class="filmFiguur" src='/images/${film.id}.jpg' alt='${film.titel}' title='reservatie mogelijk'>
-							</c:when>
-							<c:otherwise>
-								<img class="filmFiguur" src='/images/${film.id}.jpg' alt='${film.titel}' title='reservatie niet mogelijk'>
-							</c:otherwise>
-						</c:choose>
+					<li><a href='<spring:url value='${url}'/>'> <c:choose>
+								<c:when test='${film.gereserveerd<film.voorraad}'>
+									<img class="filmFiguur" src='/images/${film.id}.jpg'
+										alt='${film.titel}' title='reservatie mogelijk'>
+								</c:when>
+								<c:otherwise>
+									<img class="filmFiguur" src='/images/${film.id}.jpg'
+										alt='${film.titel}' title='reservatie niet mogelijk'>
+								</c:otherwise>
+							</c:choose>
 					</a></li>
 				</c:forEach>
 			</ul>

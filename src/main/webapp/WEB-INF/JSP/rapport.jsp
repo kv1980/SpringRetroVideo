@@ -1,15 +1,12 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" session="false"%>
-<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
-<%@taglib prefix='spring' uri='http://www.springframework.org/tags' %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <%@taglib prefix='vdab' uri='http://vdab.be/tags'%>
-<%@taglib prefix='form' uri='http://www.springframework.org/tags/form'%>
-
 
 <!DOCTYPE html>
 <html lang='nl'>
-<vdab:head title='rapport'/>
+<vdab:head title='rapport' />
 <body>
-	<vdab:menuIndex/>
+	<vdab:menuIndex />
 	<h1>Rapport</h1>
 	<c:choose>
 		<c:when test='${empty nietGereserveerdeFilms}'>

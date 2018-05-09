@@ -1,5 +1,7 @@
 package be.vdab.retrovideo.repositories;
 
+import static org.junit.Assert.assertTrue;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 

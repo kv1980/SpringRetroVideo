@@ -1,19 +1,16 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" session="false"%>
-<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
-<%@taglib prefix='spring' uri='http://www.springframework.org/tags' %>
+<%@taglib prefix='spring' uri='http://www.springframework.org/tags'%>
 <%@taglib prefix='vdab' uri='http://vdab.be/tags'%>
-<%@taglib prefix='form' uri='http://www.springframework.org/tags/form'%>
-
 
 <!DOCTYPE html>
 <html lang='nl'>
-<vdab:head title='bevestigen'/>
+<vdab:head title='bevestigen' />
 <body>
-	<vdab:menuMandje/>
+	<vdab:menuMandje />
 	<h1>Bevestigen</h1>
 	<p>${aantalFilms} film(s) voor ${klant.naam}</p>
-	<spring:url value='/bestelling/rapport/{klantId}' var='url'>   
-		<spring:param name='klantId' value='${klant.id}'/>
+	<spring:url value='/bestelling/rapport/{klantId}' var='url'>
+		<spring:param name='klantId' value='${klant.id}' />
 	</spring:url>
 	<form action='${url}' method='get' id='form'>
 		<input type='submit' value='Bevestig' id='knop'>
